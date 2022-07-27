@@ -5,8 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 
-import com.example.baseproject.ProductionLine;
-
 public class ApplicationController extends Application {
     public static final String NOTIFICATION_CHANNEL_ID = "notification_channel";
 
