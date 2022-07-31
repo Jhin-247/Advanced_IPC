@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BaseProject">
         <activity
-            android:name=".ClientMainActivity"
+            android:name=".view.ClientMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

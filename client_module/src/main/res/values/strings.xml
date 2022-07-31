@@ -3,4 +3,18 @@
 
     <string name="result">Product id: %1$d \nProduct name: %2$s</string>
     <string name="get_product">Get product</string>
+
+    <string name="connection_error">Connect failed, please turn on server app and reconnect</string>
+    <string name="connect_success">Connect success!!!</string>
+
+    <string name="request">Request</string>
+    <string name="retry">Retry</string>
+
+    <string name="requesting">Your item is being requested</string>
+    <string name="request_success">Your item has finished</string>
+    <string name="request_failed">Failed to request</string>
+
+    <string name="product_id">Id: %1$d</string>
+    <string name="product_name">Name: %1$s</string>
+
 </resources>

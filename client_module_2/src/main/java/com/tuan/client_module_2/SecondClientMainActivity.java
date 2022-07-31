@@ -17,6 +17,9 @@ import com.example.baseproject.IRemoteService;
 import com.example.baseproject.MyProduct;
 import com.tuan.client_module_2.databinding.ActivitySecondClientMainBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SecondClientMainActivity extends AppCompatActivity {
     private ActivitySecondClientMainBinding mBinding;
     private final ICallBack callBack = new ICallBack.Stub() {
@@ -67,6 +70,5 @@ public class SecondClientMainActivity extends AppCompatActivity {
                 }
             });
         });
-
     }
 }

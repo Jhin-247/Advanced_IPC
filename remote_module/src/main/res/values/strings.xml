@@ -1,4 +1,7 @@
 <resources>
   <string name="app_name">Base Project</string>
     <string name="start_production">Start production</string>
+
+  <string name="product_id">Id: %1$d</string>
+  <string name="product_name">Name: %1$s</string>
 </resources>

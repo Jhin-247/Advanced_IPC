@@ -1,8 +1,5 @@
 package com.example.baseproject.service;
 
-import static com.example.baseproject.service.ApplicationController.NOTIFICATION_CHANNEL_ID;
-
-import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
@@ -13,14 +10,15 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 
 import com.example.baseproject.ICallBack;
 import com.example.baseproject.IRemoteService;
 import com.example.baseproject.MyProduct;
-import com.example.baseproject.R;
+import com.example.baseproject.observer.ProductObserver;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class RemoteService extends Service {
@@ -28,6 +26,7 @@ public class RemoteService extends Service {
     private HandlerThread productionThread;
     private HandlerThread requestThread;
     private Queue<MyProduct> mProductQueue;
+    private boolean canProduce = true;
     private final IRemoteService.Stub iRemoteService = new IRemoteService.Stub() {
         @Override
         public int getPid() {
@@ -42,6 +41,9 @@ public class RemoteService extends Service {
                     if (mProductQueue.size() > 0) {
                         try {
                             callBack.onReceiveProduct(mProductQueue.remove());
+                            List<MyProduct> productList = new ArrayList<>(mProductQueue);
+                            ProductObserver.getInstance().notifyUpdate(productList);
+                            canProduce = true;
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
@@ -52,7 +54,6 @@ public class RemoteService extends Service {
             });
         }
     };
-    private boolean canProduce = true;
     private final Runnable runnable = new Runnable() {
         @SuppressWarnings({"BusyWait", "InfiniteLoopStatement"})
         @Override
@@ -60,7 +61,7 @@ public class RemoteService extends Service {
             int i = 1;
             while (true) {
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
                     String productName = "Product : " + System.currentTimeMillis();
                     MyProduct myProduct = new MyProduct();
                     myProduct.mProductName = productName;
@@ -71,6 +72,8 @@ public class RemoteService extends Service {
                         Log.i(TAG, "run: " + productName + "\nNumber: " + mProductQueue.size());
                         canProduce = mProductQueue.size() < 10;
                     }
+                    List<MyProduct> productList = new ArrayList<>(mProductQueue);
+                    ProductObserver.getInstance().notifyUpdate(productList);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -87,18 +90,8 @@ public class RemoteService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        createNotification();
         initProductionChain();
         return START_NOT_STICKY;
-    }
-
-    private void createNotification() {
-        Notification notification = new NotificationCompat.Builder(getApplication(), NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText("Progressing")
-                .build();
-        startForeground(1, notification);
     }
 
     private void initProductionChain() {
@@ -117,5 +110,6 @@ public class RemoteService extends Service {
 
         requestThread = new HandlerThread("request_thread");
         requestThread.start();
+
     }
 }
