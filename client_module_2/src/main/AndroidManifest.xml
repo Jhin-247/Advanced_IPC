@@ -3,7 +3,7 @@
     package="com.tuan.client_module_2">
 
     <queries>
-        <package android:name="com.example.baseproject"/>
+        <package android:name="com.example.baseproject" />
     </queries>
 
     <application
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BaseProject">
         <activity
-            android:name=".SecondClientMainActivity"
+            android:name=".view.ClientMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

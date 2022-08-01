@@ -1,4 +1,4 @@
-package com.tuan.client_module.view;
+package com.tuan.client_module_2.view;
 
 import android.os.Bundle;
 
@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.baseproject.MyProduct;
-import com.tuan.client_module.R;
-import com.tuan.client_module.adapter.ProductAdapter;
-import com.tuan.client_module.databinding.ClientActivityMainBinding;
-import com.tuan.client_module.presenter.client_main.Contract;
-import com.tuan.client_module.presenter.client_main.Presenter;
+import com.tuan.client_module_2.R;
+import com.tuan.client_module_2.adapter.ProductAdapter;
+import com.tuan.client_module_2.databinding.ClientActivityMainBinding;
+import com.tuan.client_module_2.presenter.client_main.Contract;
+import com.tuan.client_module_2.presenter.client_main.Presenter;
 
 public class ClientMainActivity extends AppCompatActivity implements Contract.View {
     private ClientActivityMainBinding mBinding;
